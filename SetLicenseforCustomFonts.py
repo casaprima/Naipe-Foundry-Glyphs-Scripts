@@ -69,16 +69,18 @@ No se permite modificar, adaptar, alterar, convertir, traducir o de cualquier ot
 No está permitido enviar o compartir las fuentes {family_name} con ninguna persona u organización, o cualquier tercero que no haya sido contratado directamente por {client_name} como proveedor, socio, franquiciado, contratista o de cualquier otra manera asociado."""
     }
 
-    # --- Overwrite existing licenses safely ---
-    if font.licenses is None:
-        font.setProperty_value_("licenses", {})
-    else:
-        for key in list(font.licenses.keys()):
-            del font.licenses[key]
+    # --- Set License (localized) ---
+    # Localized license text lives under the "licenses" property, with one
+    # sub-value per language tag: "dflt" (English/default), "PTG" (Portuguese),
+    # "ESP" (Spanish). Clear any existing entries first so old languages or
+    # stale text don't linger, then write fresh values for all three.
+    for prop in list(font.properties):
+        if prop.key == "licenses":
+            font.properties.remove(prop)
 
-    font.license = license_texts["English"]
-    font.licenses["Portuguese"] = license_texts["Portuguese"]
-    font.licenses["Spanish"] = license_texts["Spanish"]
+    font.setProperty_value_languageTag_("licenses", license_texts["English"], "dflt")
+    font.setProperty_value_languageTag_("licenses", license_texts["Portuguese"], "PTG")
+    font.setProperty_value_languageTag_("licenses", license_texts["Spanish"], "ESP")
 
 
     # --- Set Trademark ---
