@@ -13,7 +13,7 @@ from GlyphsApp import Glyphs
 ALPHABETS = {
     "Latin": {
         "lower": list("abcdefghijklmnopqrstuvwxyz"),
-        "upper": list("ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
+        "upper": list("ABCDEFGHIJKLMNOPÞQRSTUVWXYZ"),
     },
     "Greek": {
         "lower": list("αβγδεζηθικλμνξοπρσςτυφχψω"),
