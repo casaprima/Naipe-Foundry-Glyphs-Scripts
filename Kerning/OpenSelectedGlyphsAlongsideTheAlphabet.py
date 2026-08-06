@@ -52,10 +52,16 @@ def filter_alphabet(font, chars):
     return [c for c in chars if font_has_char(font, c)]
 
 def glyph_string(glyph):
-    """Return the tab-string representation of a glyph (char or /name)."""
+    """Return the tab-string representation of a glyph (char or /name).
+
+    Note: a "/name" token in Glyphs' tab-string syntax is only terminated
+    by whitespace, so a trailing space is added here to keep it from
+    merging with whatever character follows it (e.g. "/a.ss01" + "b"
+    would otherwise be parsed as the single glyph name "a.ss01b").
+    """
     if glyph.unicode:
         return chr(int(glyph.unicode, 16))
-    return "/" + glyph.name
+    return "/" + glyph.name + " "
 
 # ── Core string builder ──────────────────────────────────────────────────────
 
